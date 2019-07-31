@@ -24,23 +24,22 @@
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.0 
+//	Swift: 5.0
 //
 //	MacOS: 10.15
 //
 
+import UIKit
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
-        Text("Hello World")
-    }
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+	var window: UIWindow?
+	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+		if let windowScene = scene as? UIWindowScene {
+		    let window = UIWindow(windowScene: windowScene)
+			window.rootViewController = UIHostingController(rootView: RepositoryList(store: Store()))
+		    self.window = window
+		    window.makeKeyAndVisible()
+		}
+	}
 }
-
-#if DEBUG
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-#endif

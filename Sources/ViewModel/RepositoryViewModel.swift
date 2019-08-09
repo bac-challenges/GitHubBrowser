@@ -29,8 +29,52 @@
 //	MacOS: 10.15
 //
 
-import Foundation
+import SwiftUI
 
-struct RepositoryViewModel {
+struct RepositoryViewModel: Identifiable {
+	let id: UUID = UUID()
+	let name: String
+	let fullName: String
 	
+	// Detail
+	let description: String
+	let url: String
+	let forks: Int
+	let watchers: Int
+	let created: Date
+	let openIssues: Int
+	
+	var createdString: String {
+		let dateFormatterPrint = DateFormatter()
+		dateFormatterPrint.dateFormat = "MMM dd,yyyy"
+		return "Created: \(dateFormatterPrint.string(from: created))"
+	}
+}
+
+extension RepositoryViewModel  {
+	init(source: Repository) {
+		
+		self.init(name: source.name,
+				  fullName: source.fullName,
+				  description: source.description ?? "",
+				  url: source.url,
+				  forks: source.forks,
+				  watchers: source.watchers,
+				  created: source.createdAt,
+				  openIssues: source.openIssuesCount)
+	}
+}
+
+// MARK: - Preview
+extension RepositoryViewModel {
+	static var preview: RepositoryViewModel {
+		return RepositoryViewModel(source: Repository(name: "source.name",
+													  fullName: "source.fullName",
+													  description: "source.description",
+													  url: "URL",
+													  forks: 102,
+													  watchers: 103,
+													  createdAt: Date(),
+													  openIssuesCount: 104))
+	}
 }

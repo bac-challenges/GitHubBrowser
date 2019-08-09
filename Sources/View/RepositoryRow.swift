@@ -32,15 +32,27 @@
 import SwiftUI
 
 struct RepositoryRow: View {
-    var body: some View {
-        Text("RepositoryRow")
+	
+	var model: RepositoryViewModel
+	
+	var body: some View {
+		VStack(alignment: .leading) {
+			Text(model.name)
+				.font(.headline)
+				.fontWeight(.light)
+				.foregroundColor(.primary)
+			
+			Text(model.fullName)
+				.font(.subheadline)
+				.foregroundColor(.accentColor)
+		}
     }
 }
 
 #if DEBUG
 struct RepositoryRow_Previews: PreviewProvider {
-    static var previews: some View {
-        RepositoryRow()
+	static var previews: some View {
+		RepositoryRow(model: RepositoryViewModel.preview)
     }
 }
 #endif

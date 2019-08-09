@@ -20,23 +20,46 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: 914183E1-87FA-4A3F-AA2E-341871B0C6BB
+//	ID: 8307DA14-0A3D-4539-B244-FE5EAA05CEB4
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.0
+//	Swift: 5.0 
 //
 //	MacOS: 10.15
 //
 
 import SwiftUI
-import Combine
 
-final class Store: BindableObject {
-
-	var willChange = PassthroughSubject<Void, Never>()
+struct SearchView: View {
 	
-	var items: [Repository] = [] {
-		didSet { willChange.send() }
+	@EnvironmentObject var store: RepositoryStore
+	@State private var query: String = "Swift"
+
+    var body: some View {
+		HStack() {
+			TextField("Type repository name...", text: $query, onCommit: fetch)
+				.textFieldStyle(.roundedBorder)
+			
+			Button("Clear") {
+				self.query = ""
+				self.fetch()
+			}
+		}
+		.padding(.top, 10)
+		.padding(.bottom, 10)
+		.onAppear(perform: fetch)
+    }
+
+	private func fetch() {
+		store.search(query: query)
 	}
 }
+
+#if DEBUG
+struct SearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchView()
+    }
+}
+#endif

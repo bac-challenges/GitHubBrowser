@@ -31,6 +31,13 @@
 
 import Foundation
 
-struct Repository {
-	
+struct Repository: Codable {
+	let name: String
+	let fullName: String
+	let description: String?
+	let url: String
+	let forks: Int
+	let watchers: Int
+	let createdAt: Date
+	let openIssuesCount: Int
 }

@@ -33,17 +33,27 @@ import SwiftUI
 
 struct RepositoryList: View {
 	
-	@ObjectBinding var store: Store
+	@EnvironmentObject var store: RepositoryStore
 	
     var body: some View {
-        Text("RepositoryList")
-    }
+		NavigationView {
+			List() {
+				Section(header: SearchView()) {
+					ForEach(store.items) { item in
+						NavigationLink(destination: RepositoryDetail(repo: item)) {
+							RepositoryRow(model: item)
+						}
+					}
+				}
+			}.navigationBarTitle(Text("Search"), displayMode: .large)
+		}
+	}
 }
 
-//#if DEBUG
-//struct RepositoryList_Previews: PreviewProvider {
-//    static var previews: some View {
-//		RepositoryList()
-//    }
-//}
-//#endif
+#if DEBUG
+struct RepositoryList_Previews: PreviewProvider {
+    static var previews: some View {
+		RepositoryList().environmentObject(RepositoryStore(items: [RepositoryViewModel.preview]))
+    }
+}
+#endif

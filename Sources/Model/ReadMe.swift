@@ -20,26 +20,17 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: 6B93DA0F-E226-449C-95FB-C832039C9DF9
+//	ID: 4EDB234B-4343-4B0B-A2C0-97D49115B0CE
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.0
+//	Swift: 5.0 
 //
 //	MacOS: 10.15
 //
 
-import UIKit
-import SwiftUI
+import Foundation
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-	var window: UIWindow?
-	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-		if let windowScene = scene as? UIWindowScene {
-		    let window = UIWindow(windowScene: windowScene)
-			window.rootViewController = UIHostingController(rootView: RepositoryList().environmentObject(RepositoryStore()))
-		    self.window = window
-		    window.makeKeyAndVisible()
-		}
-	}
+struct ReadMe: Codable {
+	let content: Data
 }

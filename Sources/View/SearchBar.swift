@@ -31,7 +31,7 @@
 
 import SwiftUI
 
-struct SearchView: View {
+struct SearchBar: View {
 	
 	@EnvironmentObject var store: RepositoryStore
 	@State private var query: String = "Swift"
@@ -59,7 +59,7 @@ struct SearchView: View {
 #if DEBUG
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        SearchBar()
     }
 }
 #endif

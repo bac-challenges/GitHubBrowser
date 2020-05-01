@@ -38,7 +38,7 @@ struct RepositoryList: View {
     var body: some View {
 		NavigationView {
 			List() {
-				Section(header: SearchView()) {
+				Section(header: SearchBar()) {
 					ForEach(store.items) { item in
 						NavigationLink(destination: RepositoryDetail(repo: item)) {
 							RepositoryRow(model: item)

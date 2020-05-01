@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		600C98CB22FDDE7A00923E05 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600C98CA22FDDE7A00923E05 /* SearchView.swift */; };
+		600C98CB22FDDE7A00923E05 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600C98CA22FDDE7A00923E05 /* SearchBar.swift */; };
 		600C98CD22FDE4F200923E05 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 600C98CC22FDE4F200923E05 /* README.md */; };
 		6085CB2C22F18981005507EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6085CB2B22F18981005507EA /* AppDelegate.swift */; };
 		6085CB2E22F18981005507EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6085CB2D22F18981005507EA /* SceneDelegate.swift */; };
@@ -24,7 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		600C98CA22FDDE7A00923E05 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		600C98CA22FDDE7A00923E05 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		600C98CC22FDE4F200923E05 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6085CB2822F18981005507EA /* GitHubBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6085CB2B22F18981005507EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 				6085CB2F22F18981005507EA /* RepositoryList.swift */,
 				6085CB4122F18C3E005507EA /* RepositoryRow.swift */,
 				6085CB4322F18C52005507EA /* RepositoryDetail.swift */,
-				600C98CA22FDDE7A00923E05 /* SearchView.swift */,
+				600C98CA22FDDE7A00923E05 /* SearchBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -220,7 +220,7 @@
 				60915C7822F1F39200E2086E /* RepositoryStore.swift in Sources */,
 				6085CB3022F18981005507EA /* RepositoryList.swift in Sources */,
 				60E927D822F2F57000558223 /* ReadMe.swift in Sources */,
-				600C98CB22FDDE7A00923E05 /* SearchView.swift in Sources */,
+				600C98CB22FDDE7A00923E05 /* SearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

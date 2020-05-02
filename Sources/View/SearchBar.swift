@@ -32,23 +32,32 @@
 import SwiftUI
 
 struct SearchBar: View {
-	
+
 	@EnvironmentObject var store: RepositoryStore
-	@State private var query: String = "Swift"
+	@State private var query: String = ""
 
     var body: some View {
 		HStack() {
-			TextField("Type repository name...", text: $query, onCommit: fetch)
-				.textFieldStyle(RoundedBorderTextFieldStyle())
+			Image(systemName: "magnifyingglass")
+			
+			TextField("Type repository name...", text: $query, onEditingChanged: {_ in
+				self.fetch() }).textFieldStyle(RoundedBorderTextFieldStyle())
 
-			Button("Clear") {
-				self.query = ""
-				self.fetch()
+			if !query.isEmpty {
+				Button(action: {
+					self.query = ""
+					self.fetch()
+					
+				}) {
+					Image(systemName: "multiply.circle")
+				}
 			}
 		}
 		.padding(.top, 10)
 		.padding(.bottom, 10)
 		.onAppear(perform: fetch)
+		.animation(.default)
+		
     }
 
 	private func fetch() {
@@ -59,7 +68,54 @@ struct SearchBar: View {
 #if DEBUG
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBar()
+		SearchBar()
     }
 }
 #endif
+
+//struct SearchBar: View {
+//
+//	@Binding var text: String
+//	@Binding var isActiveBar: Bool
+//
+//	var body: some View {
+//		HStack(alignment: VerticalAlignment.center, spacing: 0, content: {
+//
+//			ContainerView(text: $text, isActiveField: $isActiveBar)
+//
+//			Button("Cancel") {
+//				self.isActiveBar = false
+//				self.text = ""
+//			}
+//			.padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: isActiveBar ? 16 : -52))
+//
+//		}).animation(.default)
+//	}
+//}
+//
+//struct ContainerView: View {
+//
+//	@Binding var text: String
+//	@Binding var isActiveField: Bool
+//
+//	var body: some View {
+//		ZStack {
+//			//BackgroundView()
+//			HStack {
+//				Image(systemName: "magnifyingglass")
+//
+//				TextField("Type repository name...", text: $text, onEditingChanged: { isActive in
+//					self.isActiveField = isActive as Bool
+//				})
+//
+//				if !text.isEmpty {
+//					Button(action: {
+//						self.text = "" as String
+//					}) {
+//						Image(systemName: "multiply.circle")
+//					}
+//				}
+//			}
+//		}
+//	}
+//}

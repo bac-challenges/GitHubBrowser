@@ -73,8 +73,6 @@ struct Service {
 		var request = URLRequest(url: components.url!)
 		request.httpMethod = endpoint.httpMethod.rawValue
 		
-		print(request.url)
-
 		let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
 			guard let data = data else {
 				completionHandler(.failure(.noResponse))

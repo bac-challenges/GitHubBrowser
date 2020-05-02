@@ -39,8 +39,8 @@ struct SearchBar: View {
     var body: some View {
 		HStack() {
 			TextField("Type repository name...", text: $query, onCommit: fetch)
-				.textFieldStyle(.roundedBorder)
-			
+				.textFieldStyle(RoundedBorderTextFieldStyle())
+
 			Button("Clear") {
 				self.query = ""
 				self.fetch()

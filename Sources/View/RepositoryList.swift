@@ -1,6 +1,6 @@
 //	MIT License
 //
-//	Copyright © 2019 Emile, Blue Ant Corp
+//	Copyright © 2020 Emile, Blue Ant Corp
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.0
+//	Swift: 5.2
 //
 //	MacOS: 10.15
 //
@@ -38,7 +38,7 @@ struct RepositoryList: View {
     var body: some View {
 		NavigationView {
 			List() {
-				Section(header: SearchView()) {
+				Section(header: SearchBar()) {
 					ForEach(store.items) { item in
 						NavigationLink(destination: RepositoryDetail(repo: item)) {
 							RepositoryRow(model: item)

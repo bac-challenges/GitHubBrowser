@@ -34,26 +34,26 @@ import SwiftUI
 struct RepositoryDetail: View {
 	
 	@EnvironmentObject var store: RepositoryStore
-	@State var repo: RepositoryViewModel
+	@State var model: RepositoryViewModel
 	
     var body: some View {
 		VStack(alignment: .leading) {
 			
-			RepositoryName(repo: $repo)
+			RepositoryName(model: $model)
 			
 			Divider()
 			
-			Text(repo.description)
+			Text(model.description)
 				.font(.subheadline)
 				.foregroundColor(.secondary)
 			
 			Divider()
 			
-			RepositoryStats(repo: $repo)
+			RepositoryStats(model: $model)
 			
 			Divider()
 
-			Text(repo.createdString)
+			Text(model.createdString)
 				.font(.subheadline)
 				.fontWeight(.light)
 				.foregroundColor(.secondary)
@@ -72,14 +72,14 @@ struct RepositoryDetail: View {
     }
 	
 	private func fetch() {
-		store.fetch(repo: repo.fullName)
+		store.fetch(repo: model.fullName)
 	}
 }
 
 #if DEBUG
 struct RepositoryDetail_Previews: PreviewProvider {
     static var previews: some View {
-		RepositoryDetail(repo: RepositoryViewModel.preview)
+		RepositoryDetail(model: RepositoryViewModel.preview)
     }
 }
 #endif

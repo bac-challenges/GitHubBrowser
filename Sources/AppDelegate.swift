@@ -24,7 +24,7 @@
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.0
+//	Swift: 5.2
 //
 //	MacOS: 10.15
 //

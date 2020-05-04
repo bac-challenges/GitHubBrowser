@@ -24,7 +24,7 @@
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.0 
+//	Swift: 5.2 
 //
 //	MacOS: 10.15
 //
@@ -34,30 +34,23 @@ import SwiftUI
 struct SearchBar: View {
 
 	@EnvironmentObject var store: RepositoryStore
-	@State private var query: String = ""
-
+	@State private var query = ""
+	@State private var isActiveBar = false
+	
     var body: some View {
-		HStack() {
-			Image(systemName: "magnifyingglass")
-			
-			TextField("Type repository name...", text: $query, onEditingChanged: {_ in
-				self.fetch() }).textFieldStyle(RoundedBorderTextFieldStyle())
-
-			if !query.isEmpty {
-				Button(action: {
-					self.query = ""
-					self.fetch()
-					
-				}) {
-					Image(systemName: "multiply.circle")
-				}
-			}
-		}
-		.padding(.top, 10)
-		.padding(.bottom, 10)
-		.onAppear(perform: fetch)
-		.animation(.default)
 		
+		HStack {
+			
+			SearchField(store: store, text: $query, isActiveBar: $isActiveBar)
+			
+			Button("Search") {
+				self.fetch()
+			}
+			.padding(.trailing, isActiveBar ? -10 : -100)
+			.accentColor(.primary)
+		}
+		.padding(EdgeInsets(top: 8, leading: -10, bottom: 8, trailing: 0))
+		.animation(.default)
     }
 
 	private func fetch() {
@@ -72,6 +65,39 @@ struct SearchView_Previews: PreviewProvider {
     }
 }
 #endif
+
+private struct SearchField: View {
+	
+	var store: RepositoryStore
+	@Binding var text: String
+	@Binding var isActiveBar: Bool
+	
+	var body: some View {
+		
+		ZStack {
+			RoundedRectangle(cornerRadius: 10).foregroundColor(.white)
+			
+			HStack {
+				Image(systemName: "magnifyingglass").foregroundColor(.secondary)
+				
+				TextField("Type repository name...", text: $text, onEditingChanged: { isActive in
+					self.isActiveBar = isActive
+				})
+				
+				if !text.isEmpty {
+					Button(action: {
+						self.text = ""
+						self.store.clear()
+					}) {
+						Image(systemName: "multiply.circle")
+					}.accentColor(.secondary)
+				}
+			}
+			.padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+		}
+	}
+}
+
 
 //struct SearchBar: View {
 //

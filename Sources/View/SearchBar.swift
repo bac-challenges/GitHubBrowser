@@ -34,7 +34,7 @@ import SwiftUI
 struct SearchBar: View {
 
 	@EnvironmentObject var store: RepositoryStore
-	@State private var query = ""
+	@State private var query = "ProductBrowser"
 	@State private var isActiveBar = false
 	
     var body: some View {
@@ -65,35 +65,3 @@ struct SearchView_Previews: PreviewProvider {
     }
 }
 #endif
-
-private struct SearchField: View {
-	
-	var store: RepositoryStore
-	@Binding var text: String
-	@Binding var isActiveBar: Bool
-	
-	var body: some View {
-		
-		ZStack {
-			RoundedRectangle(cornerRadius: 10).foregroundColor(.white)
-			
-			HStack {
-				Image(systemName: "magnifyingglass").foregroundColor(.secondary)
-				
-				TextField("Search repositories", text: $text, onEditingChanged: { isActive in
-					self.isActiveBar = isActive
-				})
-				
-				if !text.isEmpty {
-					Button(action: {
-						self.text = ""
-						self.store.clear()
-					}) {
-						Image(systemName: "multiply.circle")
-					}.accentColor(.secondary)
-				}
-			}
-			.padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-		}
-	}
-}

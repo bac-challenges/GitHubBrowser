@@ -38,14 +38,8 @@ struct RepositoryDetail: View {
 	
     var body: some View {
 		VStack(alignment: .leading) {
-			Text(repo.name)
-				.font(.largeTitle)
-				.fontWeight(.light)
-				.foregroundColor(.primary)
 			
-			Text(repo.fullName)
-				.font(.subheadline)
-				.foregroundColor(.secondary)
+			RepositoryName(repo: $repo)
 			
 			Divider()
 			
@@ -55,37 +49,23 @@ struct RepositoryDetail: View {
 			
 			Divider()
 			
+			RepositoryStats(repo: $repo)
+			
+			Divider()
+
 			Text(repo.createdString)
 				.font(.subheadline)
 				.fontWeight(.light)
-				.foregroundColor(.accentColor)
+				.foregroundColor(.secondary)
 			
 			Divider()
 			
-			HStack() {
-				Text("Forks: \(repo.forks)")
-					.font(.subheadline)
-					.fontWeight(.light)
-					.foregroundColor(.secondary)
-				
-				Spacer()
-				
-				Text("Watchers: \(repo.watchers)")
-					.font(.subheadline)
-					.fontWeight(.light)
-					.foregroundColor(.secondary)
-				
-				Spacer()
-				
-				Text("Issues: \(repo.openIssues)")
-					.font(.subheadline)
-					.fontWeight(.light)
-					.foregroundColor(.secondary)
-			}
+			Text("# ProductBrowser\nAn iOS project implementing REST service and MVVP pattern\n")
+				.font(.subheadline)
+				.foregroundColor(.secondary)
 			
 			Spacer()
 		}
-		.frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
 		.navigationBarTitle(Text("Repository"), displayMode: .inline)
 		.padding()
 		.onAppear(perform: fetch)

@@ -20,17 +20,45 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: 4EDB234B-4343-4B0B-A2C0-97D49115B0CE
+//	ID: C34FD5E3-DB04-4BC0-9721-B2654298D5ED
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.2 
+//	Swift: 5.2
 //
 //	MacOS: 10.15
 //
 
-import Foundation
+import SwiftUI
 
-struct ReadMe: Codable {
-	let content: String
+struct SearchField: View {
+	
+	var store: RepositoryStore
+	@Binding var text: String
+	@Binding var isActiveBar: Bool
+	
+	var body: some View {
+		
+		ZStack {
+			RoundedRectangle(cornerRadius: 10).foregroundColor(.white)
+			
+			HStack {
+				Image(systemName: "magnifyingglass").foregroundColor(.secondary)
+				
+				TextField("Search repositories", text: $text, onEditingChanged: { isActive in
+					self.isActiveBar = isActive
+				})
+				
+				if !text.isEmpty {
+					Button(action: {
+						self.text = ""
+						self.store.clear()
+					}) {
+						Image(systemName: "multiply.circle")
+					}.accentColor(.secondary)
+				}
+			}
+			.padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+		}
+	}
 }

@@ -20,17 +20,25 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: 4EDB234B-4343-4B0B-A2C0-97D49115B0CE
+//	ID: 02E5B910-097E-4473-B5E1-4362437D79EC
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.2 
+//	Swift: 5.0 
 //
 //	MacOS: 10.15
 //
 
 import Foundation
 
-struct ReadMe: Codable {
-	let content: String
+extension String {
+	func fromBase64() -> String? {
+		guard let data = Data(base64Encoded: self.replacingOccurrences(of: "\n", with: "")) else {
+			return nil
+		}
+		return String(data: data, encoding: .utf8)
+	}
+	func toBase64() -> String {
+		return Data(self.utf8).base64EncodedString()
+	}
 }

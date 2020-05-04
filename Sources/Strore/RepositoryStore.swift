@@ -100,7 +100,7 @@ extension RepositoryStore {
 		service.fetch(endpoint: GitHubEndPoint.readme(repo: repo), params: nil) { (result: Result<ReadMe, ServiceError>) in
 			DispatchQueue.main.sync {
 				switch result {
-				case .success(let readme): print(readme.content.base64EncodedString())//print(RepositoryViewModel(source: repository))
+				case .success(let readme): print(readme.content.fromBase64())
 				case .failure(let error): print(error)
 				}
 			}

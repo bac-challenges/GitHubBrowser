@@ -20,17 +20,43 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: 4EDB234B-4343-4B0B-A2C0-97D49115B0CE
+//	ID: 806C1B53-D758-4419-841F-D03BAE11DAA6
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.2 
+//	Swift: 5.0 
 //
 //	MacOS: 10.15
 //
 
-import Foundation
+import SwiftUI
 
-struct ReadMe: Codable {
-	let content: String
+struct RepositoryStats: View {
+	
+	@Binding var repo: RepositoryViewModel
+	
+    var body: some View {
+		
+		HStack() {
+			
+			Text("Forks: \(repo.forks)")
+				.font(.subheadline)
+				.fontWeight(.light)
+				.foregroundColor(.secondary)
+			
+			Spacer()
+			
+			Text("Watchers: \(repo.watchers)")
+				.font(.subheadline)
+				.fontWeight(.light)
+				.foregroundColor(.secondary)
+			
+			Spacer()
+			
+			Text("Issues: \(repo.openIssues)")
+				.font(.subheadline)
+				.fontWeight(.light)
+				.foregroundColor(.secondary)
+		}
+    }
 }

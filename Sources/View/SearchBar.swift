@@ -1,6 +1,6 @@
 //	MIT License
 //
-//	Copyright © 2019 Emile, Blue Ant Corp
+//	Copyright © 2020 Emile, Blue Ant Corp
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -80,7 +80,7 @@ private struct SearchField: View {
 			HStack {
 				Image(systemName: "magnifyingglass").foregroundColor(.secondary)
 				
-				TextField("Type repository name...", text: $text, onEditingChanged: { isActive in
+				TextField("Search repositories", text: $text, onEditingChanged: { isActive in
 					self.isActiveBar = isActive
 				})
 				

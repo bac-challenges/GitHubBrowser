@@ -35,6 +35,7 @@ struct RepositoryDetail: View {
 	
 	@EnvironmentObject var store: RepositoryStore
 	@State var model: RepositoryViewModel
+	@State var readme = ""
 	
     var body: some View {
 		VStack(alignment: .leading) {
@@ -60,9 +61,14 @@ struct RepositoryDetail: View {
 			
 			Divider()
 			
-			Text("# ProductBrowser\nAn iOS project implementing REST service and MVVP pattern\n")
-				.font(.subheadline)
-				.foregroundColor(.secondary)
+			if !readme.isEmpty {
+				List {
+					Text(readme)
+						.font(.subheadline)
+						.foregroundColor(.secondary)
+					
+				}
+			}
 			
 			Spacer()
 		}
@@ -72,7 +78,9 @@ struct RepositoryDetail: View {
     }
 	
 	private func fetch() {
-		store.fetch(repo: model.fullName)
+		store.fetch(repo: model.fullName) { result in
+			self.readme = result
+		}
 	}
 }
 

@@ -96,11 +96,11 @@ extension RepositoryStore {
 		}
 	}
 	
-	func fetch(repo: String) {
+	func fetch(repo: String, completionHandler: @escaping (String) -> Void) {
 		service.fetch(endpoint: GitHubEndPoint.readme(repo: repo), params: nil) { (result: Result<ReadMe, ServiceError>) in
 			DispatchQueue.main.sync {
 				switch result {
-				case .success(let readme): print(readme.content.fromBase64())
+				case .success(let readme): completionHandler(readme.content.fromBase64() ?? "")
 				case .failure(let error): print(error)
 				}
 			}

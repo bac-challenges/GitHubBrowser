@@ -46,10 +46,10 @@ struct SearchBar: View {
 			Button("Search") {
 				self.fetch()
 			}
-			.padding(.trailing, isActiveBar ? -10 : -100)
+			.padding(.trailing, isActiveBar ? 10 : -80)
 			.accentColor(.primary)
 		}
-		.padding(EdgeInsets(top: 8, leading: -10, bottom: 8, trailing: 0))
+		.padding(EdgeInsets(top: 8, leading: -10, bottom: 8, trailing: -20))
 		.animation(.default)
     }
 
@@ -97,51 +97,3 @@ private struct SearchField: View {
 		}
 	}
 }
-
-
-//struct SearchBar: View {
-//
-//	@Binding var text: String
-//	@Binding var isActiveBar: Bool
-//
-//	var body: some View {
-//		HStack(alignment: VerticalAlignment.center, spacing: 0, content: {
-//
-//			ContainerView(text: $text, isActiveField: $isActiveBar)
-//
-//			Button("Cancel") {
-//				self.isActiveBar = false
-//				self.text = ""
-//			}
-//			.padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: isActiveBar ? 16 : -52))
-//
-//		}).animation(.default)
-//	}
-//}
-//
-//struct ContainerView: View {
-//
-//	@Binding var text: String
-//	@Binding var isActiveField: Bool
-//
-//	var body: some View {
-//		ZStack {
-//			//BackgroundView()
-//			HStack {
-//				Image(systemName: "magnifyingglass")
-//
-//				TextField("Type repository name...", text: $text, onEditingChanged: { isActive in
-//					self.isActiveField = isActive as Bool
-//				})
-//
-//				if !text.isEmpty {
-//					Button(action: {
-//						self.text = "" as String
-//					}) {
-//						Image(systemName: "multiply.circle")
-//					}
-//				}
-//			}
-//		}
-//	}
-//}

@@ -34,72 +34,60 @@ import SwiftUI
 struct RepositoryDetail: View {
 	
 	@EnvironmentObject var store: RepositoryStore
-	@State var repo: RepositoryViewModel
+	@State var model: RepositoryViewModel
+	@State var readme = ""
 	
     var body: some View {
 		VStack(alignment: .leading) {
-			Text(repo.name)
-				.font(.largeTitle)
-				.fontWeight(.light)
-				.foregroundColor(.primary)
 			
-			Text(repo.fullName)
+			RepositoryName(model: $model)
+			
+			Divider()
+			
+			Text(model.description)
 				.font(.subheadline)
 				.foregroundColor(.secondary)
 			
 			Divider()
 			
-			Text(repo.description)
+			RepositoryStats(model: $model)
+			
+			Divider()
+
+			Text(model.createdString)
 				.font(.subheadline)
+				.fontWeight(.light)
 				.foregroundColor(.secondary)
 			
 			Divider()
 			
-			Text(repo.createdString)
-				.font(.subheadline)
-				.fontWeight(.light)
-				.foregroundColor(.accentColor)
-			
-			Divider()
-			
-			HStack() {
-				Text("Forks: \(repo.forks)")
-					.font(.subheadline)
-					.fontWeight(.light)
-					.foregroundColor(.secondary)
-				
-				Spacer()
-				
-				Text("Watchers: \(repo.watchers)")
-					.font(.subheadline)
-					.fontWeight(.light)
-					.foregroundColor(.secondary)
-				
-				Spacer()
-				
-				Text("Issues: \(repo.openIssues)")
-					.font(.subheadline)
-					.fontWeight(.light)
-					.foregroundColor(.secondary)
+			if !readme.isEmpty {
+				List {
+					Text(readme)
+						.font(.subheadline)
+						.foregroundColor(.secondary)
+					
+				}
 			}
 			
 			Spacer()
 		}
-		.frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
 		.navigationBarTitle(Text("Repository"), displayMode: .inline)
 		.padding()
 		.onAppear(perform: fetch)
     }
 	
 	private func fetch() {
-		store.fetch(repo: repo.fullName)
+		store.fetch(repo: model.fullName) { result in
+			self.readme = result
+		}
 	}
 }
 
 #if DEBUG
 struct RepositoryDetail_Previews: PreviewProvider {
     static var previews: some View {
-		RepositoryDetail(repo: RepositoryViewModel.preview)
+		RepositoryDetail(model: RepositoryViewModel.preview)
     }
 }
 #endif

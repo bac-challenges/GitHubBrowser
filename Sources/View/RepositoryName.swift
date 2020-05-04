@@ -20,17 +20,31 @@
 //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //	SOFTWARE.
 //
-//	ID: 4EDB234B-4343-4B0B-A2C0-97D49115B0CE
+//	ID: 310BD15D-F0DD-4CA1-8196-4A003CE8EE72
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.2 
+//	Swift: 5.2
 //
 //	MacOS: 10.15
 //
 
-import Foundation
+import SwiftUI
 
-struct ReadMe: Codable {
-	let content: String
+struct RepositoryName: View {
+	
+	@Binding var model: RepositoryViewModel
+	
+	var body: some View {
+		VStack(alignment: .leading) {
+			Text(model.name)
+				.font(.largeTitle)
+				.fontWeight(.light)
+				.foregroundColor(.primary)
+			
+			Text(model.fullName)
+				.font(.subheadline)
+				.foregroundColor(.secondary)
+		}
+	}
 }

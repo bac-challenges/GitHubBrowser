@@ -56,7 +56,7 @@ extension RepositoryViewModel  {
 		
 		self.init(name: source.name,
 				  fullName: source.fullName,
-				  description: source.description ?? "",
+				  description: source.description ?? "N/A",
 				  url: source.url,
 				  forks: source.forks,
 				  watchers: source.watchers,

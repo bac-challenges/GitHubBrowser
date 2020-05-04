@@ -80,7 +80,7 @@ private struct SearchField: View {
 			HStack {
 				Image(systemName: "magnifyingglass").foregroundColor(.secondary)
 				
-				TextField("Type repository name...", text: $text, onEditingChanged: { isActive in
+				TextField("Search repositories", text: $text, onEditingChanged: { isActive in
 					self.isActiveBar = isActive
 				})
 				

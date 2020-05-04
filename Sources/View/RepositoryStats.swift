@@ -24,7 +24,7 @@
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.0 
+//	Swift: 5.2
 //
 //	MacOS: 10.15
 //
@@ -33,27 +33,27 @@ import SwiftUI
 
 struct RepositoryStats: View {
 	
-	@Binding var repo: RepositoryViewModel
+	@Binding var model: RepositoryViewModel
 	
     var body: some View {
 		
 		HStack() {
 			
-			Text("Forks: \(repo.forks)")
+			Text("Forks: \(model.forks)")
 				.font(.subheadline)
 				.fontWeight(.light)
 				.foregroundColor(.secondary)
 			
 			Spacer()
 			
-			Text("Watchers: \(repo.watchers)")
+			Text("Watchers: \(model.watchers)")
 				.font(.subheadline)
 				.fontWeight(.light)
 				.foregroundColor(.secondary)
 			
 			Spacer()
 			
-			Text("Issues: \(repo.openIssues)")
+			Text("Issues: \(model.openIssues)")
 				.font(.subheadline)
 				.fontWeight(.light)
 				.foregroundColor(.secondary)

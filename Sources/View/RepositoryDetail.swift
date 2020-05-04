@@ -34,35 +34,41 @@ import SwiftUI
 struct RepositoryDetail: View {
 	
 	@EnvironmentObject var store: RepositoryStore
-	@State var repo: RepositoryViewModel
+	@State var model: RepositoryViewModel
+	@State var readme = ""
 	
     var body: some View {
 		VStack(alignment: .leading) {
 			
-			RepositoryName(repo: $repo)
+			RepositoryName(model: $model)
 			
 			Divider()
 			
-			Text(repo.description)
+			Text(model.description)
 				.font(.subheadline)
 				.foregroundColor(.secondary)
 			
 			Divider()
 			
-			RepositoryStats(repo: $repo)
+			RepositoryStats(model: $model)
 			
 			Divider()
 
-			Text(repo.createdString)
+			Text(model.createdString)
 				.font(.subheadline)
 				.fontWeight(.light)
 				.foregroundColor(.secondary)
 			
 			Divider()
 			
-			Text("# ProductBrowser\nAn iOS project implementing REST service and MVVP pattern\n")
-				.font(.subheadline)
-				.foregroundColor(.secondary)
+			if !readme.isEmpty {
+				List {
+					Text(readme)
+						.font(.subheadline)
+						.foregroundColor(.secondary)
+					
+				}
+			}
 			
 			Spacer()
 		}
@@ -72,14 +78,16 @@ struct RepositoryDetail: View {
     }
 	
 	private func fetch() {
-		store.fetch(repo: repo.fullName)
+		store.fetch(repo: model.fullName) { result in
+			self.readme = result
+		}
 	}
 }
 
 #if DEBUG
 struct RepositoryDetail_Previews: PreviewProvider {
     static var previews: some View {
-		RepositoryDetail(repo: RepositoryViewModel.preview)
+		RepositoryDetail(model: RepositoryViewModel.preview)
     }
 }
 #endif

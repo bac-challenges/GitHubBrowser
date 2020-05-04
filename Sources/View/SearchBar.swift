@@ -34,7 +34,7 @@ import SwiftUI
 struct SearchBar: View {
 
 	@EnvironmentObject var store: RepositoryStore
-	@State private var query = "ProductBrowser"
+	@State private var query = ""
 	@State private var isActiveBar = false
 	
     var body: some View {

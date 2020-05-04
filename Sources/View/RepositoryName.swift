@@ -24,7 +24,7 @@
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.0 
+//	Swift: 5.2
 //
 //	MacOS: 10.15
 //
@@ -33,16 +33,16 @@ import SwiftUI
 
 struct RepositoryName: View {
 	
-	@Binding var repo: RepositoryViewModel
+	@Binding var model: RepositoryViewModel
 	
 	var body: some View {
 		VStack(alignment: .leading) {
-			Text(repo.name)
+			Text(model.name)
 				.font(.largeTitle)
 				.fontWeight(.light)
 				.foregroundColor(.primary)
 			
-			Text(repo.fullName)
+			Text(model.fullName)
 				.font(.subheadline)
 				.foregroundColor(.secondary)
 		}

@@ -24,31 +24,33 @@
 //
 //	Pkg: GitHubBrowser
 //
-//	Swift: 5.0 
+//	Swift: 5.2 
 //
 //	MacOS: 10.15
 //
 
 import SwiftUI
 
-struct SearchView: View {
-	
-	@EnvironmentObject var store: RepositoryStore
-	@State private var query: String = "Swift"
+struct SearchBar: View {
 
+	@EnvironmentObject var store: RepositoryStore
+	@State private var query = ""
+	@State private var isActiveBar = false
+	
     var body: some View {
-		HStack() {
-			TextField("Type repository name...", text: $query, onCommit: fetch)
-				.textFieldStyle(.roundedBorder)
+		
+		HStack {
 			
-			Button("Clear") {
-				self.query = ""
+			SearchField(store: store, text: $query, isActiveBar: $isActiveBar)
+			
+			Button("Search") {
 				self.fetch()
 			}
+			.padding(.trailing, isActiveBar ? 10 : -80)
+			.accentColor(.primary)
 		}
-		.padding(.top, 10)
-		.padding(.bottom, 10)
-		.onAppear(perform: fetch)
+		.padding(EdgeInsets(top: 8, leading: -10, bottom: 8, trailing: -20))
+		.animation(.default)
     }
 
 	private func fetch() {
@@ -59,7 +61,39 @@ struct SearchView: View {
 #if DEBUG
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+		SearchBar()
     }
 }
 #endif
+
+private struct SearchField: View {
+	
+	var store: RepositoryStore
+	@Binding var text: String
+	@Binding var isActiveBar: Bool
+	
+	var body: some View {
+		
+		ZStack {
+			RoundedRectangle(cornerRadius: 10).foregroundColor(.white)
+			
+			HStack {
+				Image(systemName: "magnifyingglass").foregroundColor(.secondary)
+				
+				TextField("Type repository name...", text: $text, onEditingChanged: { isActive in
+					self.isActiveBar = isActive
+				})
+				
+				if !text.isEmpty {
+					Button(action: {
+						self.text = ""
+						self.store.clear()
+					}) {
+						Image(systemName: "multiply.circle")
+					}.accentColor(.secondary)
+				}
+			}
+			.padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+		}
+	}
+}

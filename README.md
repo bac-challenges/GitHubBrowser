@@ -1,6 +1,6 @@
 # GitHub Browser
 
-## Overview
+## Overview ![Swift](https://github.com/bac-challenges/GitHubBrowser/workflows/Swift/badge.svg)
 
 ### General
 
